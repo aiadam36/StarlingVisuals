@@ -14,8 +14,9 @@ needed to use or edit this extracted pack.
 The rest of the integration stays with the app: `crates/horizon-client/src/preparer.rs` installs the bundled zip in
 the game's `shaderpacks/` folder, `crates/horizon-client/src/starling_releases.rs` recognizes the release asset,
 `crates/horizon-client-render/src/graphics.rs` selects the phone-friendly light shader profile by pack name, and
-`.github/workflows/android.yml` publishes the shared archive beside the APKs. The Android release-asset tests check
-the generated zip, and `docs/android-armv7.md` explains why all APK architectures share one archive.
+`.github/workflows/android.yml` publishes the shared archive beside the APKs. `tests/test_android_exporter_bundle.py`
+checks the APK asset bundle, `tests/test_android_release_assets.py` checks the standalone generated zip, and
+`docs/android-armv7.md` explains why all APK architectures share one archive.
 
 [`docs/how-horizon-is-built.md`](https://github.com/horizon-rust/horizon/blob/main/docs/how-horizon-is-built.md)
 records the licensing incident that led to removing the earlier shader-pack support and restarting from public format
