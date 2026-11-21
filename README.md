@@ -13,3 +13,5 @@ This extraction carries the Starling project's MIT license in [LICENSE](LICENSE)
 ## Source history
 
 The shader files were extracted from `packaging/shaderpacks/starling-visuals` in the Starling repository. The nine commits that directly changed the pack are preserved as this repository's initial history, with the original authors, dates and commit messages.
+
+See [upstream context](docs/upstream-context.md) for the related Android packaging and source documentation. Agent contributions follow [AGENTS.md](AGENTS.md).
