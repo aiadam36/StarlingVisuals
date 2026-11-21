@@ -5,7 +5,7 @@
 > description of what they were. Nothing else was changed.
 
 Revision 1, 2026-10-24. Written by the spec team (an AI agent working for Ludovic) from public documentation only.
-Process and rules: [README.md](README.md).
+Scope and records: [README.md](README.md) and [provenance-log.md](provenance-log.md).
 
 This document says what a "shader pack" (the OptiFine-style format of `shaderpacks/*.zip`) contains and what a game
 must provide to run one. It is an interface description built from documentation for pack authors. It describes
