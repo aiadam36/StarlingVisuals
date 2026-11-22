@@ -91,7 +91,11 @@ vec3 fillLightAt(vec3 n, vec2 levels) {
     float sky2 = levels.y * levels.y;
     float block = levels.x;
     vec3 torch = vec3(1.0, 0.56, 0.26) * (pow(block, 4.0) * 1.8 + block * 0.08) * BLOCKLIGHT_STRENGTH;
+#if defined(STARLING_NETHER)
+    vec3 floorLight = vec3(0.045, 0.018, 0.006) + nightVision * 0.3;
+#else
     vec3 floorLight = vec3(0.012, 0.013, 0.016) + nightVision * 0.3;
+#endif
     return (ambient + bounce) * sky2 + torch + floorLight;
 }
 

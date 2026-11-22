@@ -66,10 +66,16 @@ void main() {
         // The near plane: the far one is at infinity, where w is 0.
         vec4 view = gbufferProjectionInverse * vec4(texcoord * 2.0 - 1.0, -1.0, 1.0);
         vec3 dir = normalize(mat3(gbufferModelViewInverse) * (view.xyz / view.w));
+        // Nether and End have no sun disk, stars, or Overworld sky model.
+#if defined(STARLING_NETHER) || defined(STARLING_END)
+        color = toLinear(fogColor);
+        sky = 0.0;
+#else
         // A round sun, soft at its rim (the bloom makes its glow), and the moon and stars.
         float disk = smoothstep(0.99895, 0.99935, dot(dir, s)) * (1.0 - rainStrength);
         color = skyRadiance(dir, s) + sunlight(s) * disk * 8.0 + texture2D(colortex2, texcoord).rgb;
         if (isEyeInWater == 1) color = vec3(0.02, 0.11, 0.15) * (0.15 + 0.85 * daylight(s));
+#endif
     } else {
         vec4 view = gbufferProjectionInverse * vec4(vec3(texcoord, depth) * 2.0 - 1.0, 1.0);
         vec3 rel = (gbufferModelViewInverse * vec4(view.xyz / view.w, 1.0)).xyz;
@@ -83,12 +89,19 @@ void main() {
         } else if (isEyeInWater == 3) {
             color = mix(color, vec3(0.55, 0.62, 0.70), 1.0 - exp(-dist * 0.6));
         } else {
+#if defined(STARLING_NETHER) || defined(STARLING_END)
+            // Nether and End use vanilla's dimension fog colour and density.
+            float haze = 1.0 - exp(-max(fogDensity, 0.001) * dist);
+            color = mix(color, toLinear(fogColor), haze);
+            sky = 0.0;
+#else
             float haze = 1.0 - exp(-hazeDepth(rel, cameraPosition.y, s));
             color = mix(color, hazeLight(dir, s), haze);
             // The world's edge fades into the sky behind it.
             float edge = smoothstep(far * 0.7, far, length(rel.xz));
             color = mix(color, skyRadiance(dir, s), edge);
             sky = edge * edge;
+#endif
         }
     }
 

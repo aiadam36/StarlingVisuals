@@ -88,7 +88,9 @@ vec3 raysAt(vec2 uv) {
 void main() {
     vec3 color = texture2D(colortex0, texcoord).rgb;
     #ifdef GODRAYS
+#if !defined(STARLING_NETHER) && !defined(STARLING_END)
         if (isEyeInWater == 0) color += raysAt(texcoord);
+#endif
     #endif
     #ifdef BLOOM
         color = mix(color, bloomAt(texcoord), BLOOM_STRENGTH);
