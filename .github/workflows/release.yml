@@ -1,0 +1,26 @@
+name: Package shader release
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Package shaders
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: zip -r "StarlingVisuals_${TAG_NAME}.zip" shaders
+
+      - name: Create release and upload shader archive
+        uses: softprops/action-gh-release@v2
+        with:
+          files: StarlingVisuals_${{ github.ref_name }}.zip
