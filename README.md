@@ -2,6 +2,8 @@
 
 Starling Visuals is an Iris/OptiFine-format shaderpack made for phones. It includes custom lighting and shadows, waved water with depth, atmospheric haze, sun rays, bloom, and light from the player's held item.
 
+![Screenshot 1](https://static.adamiskandar.com/images/starling-visuals/ingame-aaf1649.webp)
+
 ## Install
 
 Zip the contents of the `shaders/` directory with its files at the archive root, then place the archive in the game's `shaderpacks/` folder and select it from Shader Packs.
